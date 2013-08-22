@@ -1,0 +1,26 @@
+From d92983d6f8e5a17fe3b3afd67482ce0433257260 Mon Sep 17 00:00:00 2001
+From: Chris Leach <cxl000@hotmail.com>
+Date: Thu, 22 Aug 2013 03:54:39 +0300
+Subject: [PATCH 3/3] ref_count added after wayland 1.2.0
+
+---
+ src/shell/effects/inoutsurfaceeffect.cpp | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/src/shell/effects/inoutsurfaceeffect.cpp b/src/shell/effects/inoutsurfaceeffect.cpp
+index 71b87bf..b54936b 100644
+--- a/src/shell/effects/inoutsurfaceeffect.cpp
++++ b/src/shell/effects/inoutsurfaceeffect.cpp
+@@ -72,7 +72,9 @@ void InOutSurfaceEffect::addedSurface(ShellSurface *surface)
+     surf->surface = surface->weston_surface();
+     surf->effect = this;
+ 
++#if (WAYLAND_VERSION_MAJOR == 1) && (WAYLAND_VERSION_MINOR == 2) && (WAYLAND_VERSION_MICRO > 0)
+     ++surface->weston_surface()->ref_count;
++#endif
+     surf->listener.parent = surf;
+     surf->listener.destroyListener.notify = Surface::destroyed;
+     wl_resource_add_destroy_listener(surf->surface->resource, &surf->listener.destroyListener);
+-- 
+1.8.3-rc3
+

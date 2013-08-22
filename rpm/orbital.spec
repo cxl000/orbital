@@ -6,6 +6,9 @@ License: LGPL21
 Group: Development/Liraries
 URL: https://github.com/giucam/orbital.git
 Source0: %{name}-%{version}.tar.bz2
+Patch0:  0001-Remove-c-11-override-keyword.patch
+Patch1:  0002-Add-class-keyword-to-to-support-c-11.patch
+Patch2:  0003-ref_count-added-after-wayland-1.2.0.patch
 BuildRequires: cmake >= 2.8
 BuildRequires: pkgconfig(wayland-server)
 BuildRequires: pkgconfig(pixman-1)
@@ -28,6 +31,10 @@ without many dependencies aside Weston and Qt.
 
 %prep
 %setup -q
+cd orbital
+%patch0 -p1
+%patch1 -p1
+%patch2 -p1
 
 %build
 cd orbital

@@ -1,0 +1,25 @@
+From c9a64ec3770fbcefd95ae0384c87ff84b2d51b3e Mon Sep 17 00:00:00 2001
+From: Chris Leach <cxl000@hotmail.com>
+Date: Thu, 22 Aug 2013 03:46:10 +0300
+Subject: [PATCH 2/3] Add "class" keyword to to supprt < c++11
+
+---
+ src/shell/effects/inoutsurfaceeffect.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/shell/effects/inoutsurfaceeffect.h b/src/shell/effects/inoutsurfaceeffect.h
+index 52a58d2..fd18e0f 100644
+--- a/src/shell/effects/inoutsurfaceeffect.h
++++ b/src/shell/effects/inoutsurfaceeffect.h
+@@ -37,7 +37,7 @@ private:
+ 
+     std::list<Surface *> m_surfaces;
+ 
+-    friend Surface;
++    friend class Surface;
+ };
+ 
+ #endif
+-- 
+1.8.3-rc3
+

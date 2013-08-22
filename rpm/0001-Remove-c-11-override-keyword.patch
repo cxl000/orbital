@@ -1,0 +1,158 @@
+From 3c4924f93610fc8d03dee6f8c7ecbe92b58d9aed Mon Sep 17 00:00:00 2001
+From: Chris Leach <cxl000@hotmail.com>
+Date: Thu, 22 Aug 2013 03:44:04 +0300
+Subject: [PATCH 1/3] Remove c++11 "override" keyword
+
+---
+ src/client/element.h               |  2 +-
+ src/client/layout.h                |  6 +++---
+ src/client/styleitem.h             |  4 ++--
+ src/shell/animationcurve.h         | 14 +++++++-------
+ src/shell/desktop-shell.h          |  4 ++--
+ src/shell/effects/minimizeeffect.h |  4 ++--
+ 6 files changed, 17 insertions(+), 17 deletions(-)
+
+diff --git a/src/client/element.h b/src/client/element.h
+index be446c9..6ce913e 100644
+--- a/src/client/element.h
++++ b/src/client/element.h
+@@ -142,7 +142,7 @@ signals:
+ 
+ protected:
+     void setId(int id);
+-    virtual void geometryChanged(const QRectF &newGeometry, const QRectF &oldGeometry) override;
++    virtual void geometryChanged(const QRectF &newGeometry, const QRectF &oldGeometry);
+ 
+ private slots:
+     void focus(wl_surface *surface, int x, int y);
+diff --git a/src/client/layout.h b/src/client/layout.h
+index e4bfa92..10ee9ca 100644
+--- a/src/client/layout.h
++++ b/src/client/layout.h
+@@ -47,9 +47,9 @@ public:
+     static LayoutAttached *qmlAttachedProperties(QObject *object);
+ 
+ protected:
+-    bool event(QEvent *e) override;
+-    void itemChange(ItemChange change, const ItemChangeData &value) override;
+-    void geometryChanged(const QRectF &newGeometry, const QRectF &oldGeometry) override;
++    bool event(QEvent *e);
++    void itemChange(ItemChange change, const ItemChangeData &value);
++    void geometryChanged(const QRectF &newGeometry, const QRectF &oldGeometry);
+ 
+ private:
+     QList<QQuickItem *> m_items;
+diff --git a/src/client/styleitem.h b/src/client/styleitem.h
+index 3131960..bef6414 100644
+--- a/src/client/styleitem.h
++++ b/src/client/styleitem.h
+@@ -68,8 +68,8 @@ public:
+     QQuickItem *item() const { return m_item; }
+ 
+ protected:
+-    virtual void itemChange(ItemChange change, const ItemChangeData &value) override;
+-    virtual void geometryChanged(const QRectF &newGeometry, const QRectF &oldGeometry) override;
++    virtual void itemChange(ItemChange change, const ItemChangeData &value);
++    virtual void geometryChanged(const QRectF &newGeometry, const QRectF &oldGeometry);
+ 
+ signals:
+     void itemChanged();
+diff --git a/src/shell/animationcurve.h b/src/shell/animationcurve.h
+index e3438f7..f5fe123 100644
+--- a/src/shell/animationcurve.h
++++ b/src/shell/animationcurve.h
+@@ -68,14 +68,14 @@ OF THE POSSIBILITY OF SUCH DAMAGE.
+ 
+ class InQuadCurve : public AnimationCurve {
+ public:
+-    virtual float value(float f) override {
++    virtual float value(float f) {
+         return f * f;
+     }
+ };
+ 
+ class InOutQuadCurve : public AnimationCurve {
+ public:
+-    virtual float value(float f) override {
++    virtual float value(float f) {
+         f *= 2.f;
+         if (f < 1.f) {
+             return f * f/ 2.f;
+@@ -98,7 +98,7 @@ protected:
+ 
+ class OutBackCurve : public BackCurve {
+ public:
+-    virtual float value(float t) override {
++    virtual float value(float t) {
+         float s = m_overshoot;
+         t -= 1.f;
+         return t*t*((s+1)*t+ s) + 1;
+@@ -108,7 +108,7 @@ public:
+ 
+ class InOutBackCurve : public BackCurve {
+ public:
+-    virtual float value(float t) override {
++    virtual float value(float t) {
+         float s = m_overshoot;
+         t *= 2.0;
+         if (t < 1) {
+@@ -124,7 +124,7 @@ public:
+ 
+ class OutBounceCurve : public AnimationCurve {
+ public:
+-    virtual float value(float t) override {
++    virtual float value(float t) {
+         float c = 1.f;
+         float a = 0.5f;
+         if (t < (4/11.0)) {
+@@ -155,7 +155,7 @@ protected:
+ 
+ class OutElasticCurve : public ElasticCurve {
+ public:
+-    virtual float value(float t) override {
++    virtual float value(float t) {
+         if (t == 0.f) return 0.f;
+         if (t == 1.f) return 1.f;
+ 
+@@ -179,7 +179,7 @@ public:
+     PulseCurve() { m_pulseNormalize = 1.f; m_pulseNormalize = 1.f / pulse(1); }
+ 
+     // viscous fluid with a pulse for part and decay for the rest
+-    virtual float value(float x) override {
++    virtual float value(float x) {
+         if (x >= 1) return 1;
+         if (x <= 0) return 0;
+ 
+diff --git a/src/shell/desktop-shell.h b/src/shell/desktop-shell.h
+index 3c2b477..c0c5cd9 100644
+--- a/src/shell/desktop-shell.h
++++ b/src/shell/desktop-shell.h
+@@ -29,8 +29,8 @@ public:
+ protected:
+     virtual void init();
+     virtual void setGrabCursor(uint32_t);
+-    virtual void setBusyCursor(ShellSurface *shsurf, struct weston_seat *seat) override;
+-    virtual void endBusyCursor(struct weston_seat *seat) override;
++    virtual void setBusyCursor(ShellSurface *shsurf, struct weston_seat *seat);
++    virtual void endBusyCursor(struct weston_seat *seat);
+ 
+ private:
+     void sendInitEvents();
+diff --git a/src/shell/effects/minimizeeffect.h b/src/shell/effects/minimizeeffect.h
+index 2f20f29..342a53d 100644
+--- a/src/shell/effects/minimizeeffect.h
++++ b/src/shell/effects/minimizeeffect.h
+@@ -29,8 +29,8 @@ public:
+     ~MinimizeEffect();
+ 
+ protected:
+-    virtual void addedSurface(ShellSurface *surf) override;
+-    virtual void removedSurface(ShellSurface *surf) override;
++    virtual void addedSurface(ShellSurface *surf);
++    virtual void removedSurface(ShellSurface *surf);
+ 
+ private:
+     struct Surface;
+-- 
+1.8.3-rc3
+
