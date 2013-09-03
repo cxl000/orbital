@@ -51,4 +51,12 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root,-)
+%{_bindir}/orbital
+%{_libdir}/orbital/orbital-shell.so
+%{_libdir}/orbital/services/libloginservice.so
+%{_libdir}/orbital/services/libmixerservice.so
+%{_libdir}/orbital/services/libprocesslauncher.so
+%{_libexecdir}/orbital-client
+%{_libexecdir}/startorbital
+%{_datadir}/orbital/*/
 
