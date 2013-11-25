@@ -7,8 +7,8 @@ Group: Development/Liraries
 URL: https://github.com/giucam/orbital.git
 Source0: %{name}-%{version}.tar.bz2
 Patch0:  0001-Remove-c-11-override-keyword.patch
-Patch1:  0002-Add-class-keyword-to-to-support-c-11.patch
-Patch2:  0003-ref_count-added-after-wayland-1.2.0.patch
+#Patch1:  0002-Add-class-keyword-to-to-support-c-11.patch
+#Patch2:  0003-ref_count-added-after-wayland-1.2.0.patch
 BuildRequires: cmake >= 2.8
 BuildRequires: pkgconfig(wayland-server)
 BuildRequires: pkgconfig(pixman-1)
@@ -20,8 +20,24 @@ BuildRequires: pkgconfig(Qt5Widgets)
 BuildRequires: pkgconfig(Qt5Qml)
 BuildRequires: pkgconfig(Qt5Quick)
 BuildRequires: pkgconfig(Qt5DBus)
+BuildRequires: qt5-qttools-linguist
+BuildRequires: pkgconfig(nuclear)
 BuildRequires: pkgconfig(xkbcommon)
 BuildRequires: pkgconfig(alsa)
+
+BuildRequires:  qt5-plugin-platform-eglfs
+BuildRequires:  qt5-plugin-platform-kms
+BuildRequires:  qt5-plugin-platform-minimal
+BuildRequires:  qt5-plugin-platform-minimalegl
+BuildRequires:  qt5-plugin-platform-linuxfb
+BuildRequires:  qt5-plugin-platform-offscreen
+BuildRequires:  qt5-plugin-platform-xcb
+BuildRequires:  qt5-plugin-imageformat-jpeg
+BuildRequires:  qt5-plugin-imageformat-gif
+BuildRequires:  qt5-plugin-imageformat-ico
+BuildRequires:  qt5-plugin-bearer-nm
+BuildRequires:  qt5-plugin-bearer-connman
+BuildRequires:  qt5-plugin-bearer-generic
 
 %description
 It is composed of a Weston shell plugin and a shell client, made in Qt5,
@@ -33,8 +49,8 @@ without many dependencies aside Weston and Qt.
 %setup -q
 cd orbital
 %patch0 -p1
-%patch1 -p1
-%patch2 -p1
+#%patch1 -p1
+#%patch2 -p1
 
 %build
 cd orbital
