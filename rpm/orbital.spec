@@ -32,9 +32,9 @@ without many dependencies aside Weston and Qt.
 %prep
 %setup -q
 cd orbital
-%patch0 -p1
-%patch1 -p1
-%patch2 -p1
+#%patch0 -p1
+#%patch1 -p1
+#%patch2 -p1
 
 %build
 cd orbital
