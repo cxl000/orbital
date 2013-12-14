@@ -1,7 +1,19 @@
-diff -ru orbital/src/client/element.h b/src/client/element.h
---- orbital/src/client/element.h	2013-09-03 21:43:54.834714048 +0300
-+++ b/src/client/element.h	2013-09-03 21:57:20.246707873 +0300
-@@ -138,7 +138,7 @@
+commit 9c5942868c92bb26225ef513876019c9bc10a32b
+Author: Chris Leach <cxl000@hotmail.com>
+Date:   Mon Nov 25 01:12:27 2013 +0000
+
+    Remove c 11 override keyword
+    
+    Conflicts:
+    	src/shell/animationcurve.h
+    	src/shell/desktop-shell.h
+    	src/shell/effects/minimizeeffect.h
+
+diff --git a/src/client/element.h b/src/client/element.h
+index 2bbd12c..39891c4 100644
+--- a/src/client/element.h
++++ b/src/client/element.h
+@@ -163,7 +163,7 @@ signals:
  
  protected:
      void setId(int id);
@@ -10,10 +22,11 @@ diff -ru orbital/src/client/element.h b/src/client/element.h
  
  private slots:
      void focus(wl_surface *surface, int x, int y);
-diff -ru orbital/src/client/layout.h b/src/client/layout.h
---- orbital/src/client/layout.h	2013-09-03 21:43:54.834714048 +0300
-+++ b/src/client/layout.h	2013-09-03 21:57:20.246707873 +0300
-@@ -47,9 +47,9 @@
+diff --git a/src/client/layout.h b/src/client/layout.h
+index e4c5184..29af40f 100644
+--- a/src/client/layout.h
++++ b/src/client/layout.h
+@@ -47,9 +47,9 @@ public:
      static LayoutAttached *qmlAttachedProperties(QObject *object);
  
  protected:
@@ -26,11 +39,12 @@ diff -ru orbital/src/client/layout.h b/src/client/layout.h
  
  private:
      QList<QQuickItem *> m_items;
-diff -ru orbital/src/client/styleitem.h b/src/client/styleitem.h
---- orbital/src/client/styleitem.h	2013-09-03 21:43:54.838714068 +0300
-+++ b/src/client/styleitem.h	2013-09-03 21:57:20.246707873 +0300
-@@ -68,8 +68,8 @@
-     QQuickItem *item() const { return m_item; }
+diff --git a/src/client/styleitem.h b/src/client/styleitem.h
+index 9180243..0e11fc9 100644
+--- a/src/client/styleitem.h
++++ b/src/client/styleitem.h
+@@ -77,8 +77,8 @@ public:
+     void updateLocation(Element::Location loc);
  
  protected:
 -    virtual void itemChange(ItemChange change, const ItemChangeData &value) override;
@@ -40,10 +54,11 @@ diff -ru orbital/src/client/styleitem.h b/src/client/styleitem.h
  
  signals:
      void itemChanged();
-diff -ru orbital/src/client/tooltip.h b/src/client/tooltip.h
---- orbital/src/client/tooltip.h	2013-09-03 21:43:54.838714068 +0300
-+++ b/src/client/tooltip.h	2013-09-03 21:58:39.015098469 +0300
-@@ -40,7 +40,7 @@
+diff --git a/src/client/tooltip.h b/src/client/tooltip.h
+index 85b1909..9f69eae 100644
+--- a/src/client/tooltip.h
++++ b/src/client/tooltip.h
+@@ -40,7 +40,7 @@ public slots:
      void hide();
  
  protected:
@@ -52,96 +67,3 @@ diff -ru orbital/src/client/tooltip.h b/src/client/tooltip.h
  
  private:
      void doShow();
-diff -ru orbital/src/shell/animationcurve.h b/src/shell/animationcurve.h
---- orbital/src/shell/animationcurve.h	2013-09-03 21:43:54.838714068 +0300
-+++ b/src/shell/animationcurve.h	2013-09-03 21:57:20.246707873 +0300
-@@ -68,14 +68,14 @@
- 
- class InQuadCurve : public AnimationCurve {
- public:
--    virtual float value(float f) override {
-+    virtual float value(float f) {
-         return f * f;
-     }
- };
- 
- class InOutQuadCurve : public AnimationCurve {
- public:
--    virtual float value(float f) override {
-+    virtual float value(float f) {
-         f *= 2.f;
-         if (f < 1.f) {
-             return f * f/ 2.f;
-@@ -98,7 +98,7 @@
- 
- class OutBackCurve : public BackCurve {
- public:
--    virtual float value(float t) override {
-+    virtual float value(float t) {
-         float s = m_overshoot;
-         t -= 1.f;
-         return t*t*((s+1)*t+ s) + 1;
-@@ -108,7 +108,7 @@
- 
- class InOutBackCurve : public BackCurve {
- public:
--    virtual float value(float t) override {
-+    virtual float value(float t) {
-         float s = m_overshoot;
-         t *= 2.0;
-         if (t < 1) {
-@@ -124,7 +124,7 @@
- 
- class OutBounceCurve : public AnimationCurve {
- public:
--    virtual float value(float t) override {
-+    virtual float value(float t) {
-         float c = 1.f;
-         float a = 0.5f;
-         if (t < (4/11.0)) {
-@@ -155,7 +155,7 @@
- 
- class OutElasticCurve : public ElasticCurve {
- public:
--    virtual float value(float t) override {
-+    virtual float value(float t) {
-         if (t == 0.f) return 0.f;
-         if (t == 1.f) return 1.f;
- 
-@@ -179,7 +179,7 @@
-     PulseCurve() { m_pulseNormalize = 1.f; m_pulseNormalize = 1.f / pulse(1); }
- 
-     // viscous fluid with a pulse for part and decay for the rest
--    virtual float value(float x) override {
-+    virtual float value(float x) {
-         if (x >= 1) return 1;
-         if (x <= 0) return 0;
- 
-diff -ru orbital/src/shell/desktop-shell.h b/src/shell/desktop-shell.h
---- orbital/src/shell/desktop-shell.h	2013-09-03 21:43:54.838714068 +0300
-+++ b/src/shell/desktop-shell.h	2013-09-03 21:57:20.246707873 +0300
-@@ -29,8 +29,8 @@
- protected:
-     virtual void init();
-     virtual void setGrabCursor(uint32_t);
--    virtual void setBusyCursor(ShellSurface *shsurf, struct weston_seat *seat) override;
--    virtual void endBusyCursor(struct weston_seat *seat) override;
-+    virtual void setBusyCursor(ShellSurface *shsurf, struct weston_seat *seat);
-+    virtual void endBusyCursor(struct weston_seat *seat);
- 
- private:
-     void sendInitEvents();
-diff -ru orbital/src/shell/effects/minimizeeffect.h b/src/shell/effects/minimizeeffect.h
---- orbital/src/shell/effects/minimizeeffect.h	2013-09-03 21:43:54.838714068 +0300
-+++ b/src/shell/effects/minimizeeffect.h	2013-09-03 21:57:20.246707873 +0300
-@@ -29,8 +29,8 @@
-     ~MinimizeEffect();
- 
- protected:
--    virtual void addedSurface(ShellSurface *surf) override;
--    virtual void removedSurface(ShellSurface *surf) override;
-+    virtual void addedSurface(ShellSurface *surf);
-+    virtual void removedSurface(ShellSurface *surf);
- 
- private:
-     struct Surface;
