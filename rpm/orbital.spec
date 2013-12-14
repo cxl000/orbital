@@ -24,6 +24,7 @@ BuildRequires: qt5-qttools-linguist
 BuildRequires: pkgconfig(nuclear)
 BuildRequires: pkgconfig(xkbcommon)
 BuildRequires: pkgconfig(alsa)
+BuildRequires: qt5-default
 
 BuildRequires:  qt5-plugin-platform-eglfs
 BuildRequires:  qt5-plugin-platform-kms
