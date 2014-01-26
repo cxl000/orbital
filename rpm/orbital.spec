@@ -74,6 +74,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/orbital/services/libmixerservice.so
 %{_libdir}/orbital/services/libprocesslauncher.so
 %{_libdir}/orbital/services/libdatetime.so
+%{_libdir}/orbital/services/libhardwareservice.so
 %{_libexecdir}/orbital-client
 %{_libexecdir}/startorbital
 %{_datadir}/orbital/*/
+%{_libexecdir}/orbital-splash
