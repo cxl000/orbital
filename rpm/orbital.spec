@@ -41,6 +41,8 @@ BuildRequires:  qt5-plugin-bearer-nm
 BuildRequires:  qt5-plugin-bearer-connman
 BuildRequires:  qt5-plugin-bearer-generic
 
+Requires:       icon-theme
+
 %description
 It is composed of a Weston shell plugin and a shell client, made in Qt5,
 with the interface in QtQuick 2.
