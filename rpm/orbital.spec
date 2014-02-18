@@ -42,6 +42,7 @@ BuildRequires:  qt5-plugin-bearer-connman
 BuildRequires:  qt5-plugin-bearer-generic
 
 Requires:       icon-theme
+Requires:       qt5-qtquickcontrols
 
 %description
 It is composed of a Weston shell plugin and a shell client, made in Qt5,
